@@ -1,6 +1,7 @@
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
 import { SignIn } from "@/lib/appwrite";
+import * as Sentry from "@sentry/react-native";
 import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Text, View } from "react-native";
@@ -25,9 +26,10 @@ const SignInPage = () => {
 
             Alert.alert("Success", "You have successfully signed in!");
             router.push("/");
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error submitting form at /SignIn: ", error);
             Alert.alert("Error", "Something went wrong");
+            Sentry.captureEvent(error);
         } finally {
             setIsSubmitting(false);
         }
