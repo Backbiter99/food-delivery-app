@@ -1,10 +1,11 @@
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
+import { createUser } from "@/lib/appwrite";
 import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Alert, Text, View } from "react-native";
 
-const SignUp = () => {
+const SignUpPage = () => {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [form, setForm] = useState<{
         email: string;
@@ -25,12 +26,21 @@ const SignUp = () => {
         setIsSubmitting(true);
         try {
             // Call appwrite API to sign up user
+            await createUser({
+                email: form.email,
+                password: form.password,
+                name: form.name,
+            });
 
-            Alert.alert("Success", "You are now signed up!");
-            router.push("/SignIn");
-        } catch (error) {
+            Alert.alert("Success", "You have successfully signed up!");
+            router.push("/");
+        } catch (error: any) {
             console.error("Error submitting form at /SignUp: ", error);
-            Alert.alert("Error", "Something went wrong");
+            if (error.message) {
+                Alert.alert("Error", error.message);
+            } else {
+                Alert.alert("Error", "Something went wrong");
+            }
         } finally {
             setIsSubmitting(false);
         }
@@ -82,4 +92,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignUpPage;
