@@ -2,7 +2,7 @@ import { Redirect, Slot } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
-    const isAuthenticated = true;
+    const isAuthenticated = false;
     console.log("isAuthenticated:", isAuthenticated);
 
     if (!isAuthenticated) {
