@@ -1,4 +1,4 @@
-import { CreateUserParams, SignInParams } from "@/types";
+import { CreateUserParams, GetMenuParams, SignInParams } from "@/types";
 import {
     Account,
     AppwriteException,
@@ -161,6 +161,52 @@ export const getCurrentUser = async () => {
             throw new Error(error.message);
         } else {
             throw new Error("Unknown error getting current user");
+        }
+    }
+};
+
+export const getMenu = async ({ category, query }: GetMenuParams) => {
+    try {
+        const queries: string[] = [];
+
+        if (category) {
+            queries.push(Query.equal("category", category));
+        }
+        if (query) {
+            queries.push(Query.search("name", query));
+        }
+
+        const menus = await database.listDocuments(
+            appwriteConfig.databaseId!,
+            appwriteConfig.menuCollectionId!,
+            queries
+        );
+
+        return menus.documents;
+    } catch (error: any) {
+        console.error("Error getting menu at appwrite.ts: ", error);
+        if (error.message) {
+            throw new Error(error.message);
+        } else {
+            throw new Error("Unknown error getting menu");
+        }
+    }
+};
+
+export const getCategories = async () => {
+    try {
+        const categories = await database.listDocuments(
+            appwriteConfig.databaseId!,
+            appwriteConfig.categoriesCollectionId!
+        );
+
+        return categories.documents;
+    } catch (error: any) {
+        console.log("Error getting calories at appwrite.ts: ", error);
+        if (error.message) {
+            throw new Error(error.message);
+        } else {
+            throw new Error("Unknown error getting calories");
         }
     }
 };
