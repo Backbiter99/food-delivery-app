@@ -15,7 +15,15 @@ export const appwriteConfig = {
     platform: "com.personal.fooddeliveryapp",
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
     databaseId: process.env.EXPO_PUBLIC_APPWRITE_DB_ID,
+    assetsBucketId: process.env.EXPO_PUBLIC_APPWRITE_ASSETS_BUCKET_ID,
     userCollectionId: process.env.EXPO_PUBLIC_APPWRITE_USER_COLLECTION_ID,
+    categoriesCollectionId:
+        process.env.EXPO_PUBLIC_APPWRITE_CATEGORIES_COLLECTION_ID,
+    menuCollectionId: process.env.EXPO_PUBLIC_APPWRITE_MENU_COLLECTION_ID,
+    customizationsCollectionId:
+        process.env.EXPO_PUBLIC_APPWRITE_CUSTOMIZATIONS_COLLECTION_ID,
+    menuCustomizationsCollectionId:
+        process.env.EXPO_PUBLIC_APPWRITE_MENU_CUSTOMIZATIONS_COLLECTION_ID,
 };
 
 // Validate appwriteConfig
@@ -25,7 +33,21 @@ const validateConfig = () => {
         { key: "platform", value: appwriteConfig.platform },
         { key: "projectId", value: appwriteConfig.projectId },
         { key: "databaseId", value: appwriteConfig.databaseId },
+        { key: "assetsBucketId", value: appwriteConfig.assetsBucketId },
         { key: "userCollectionId", value: appwriteConfig.userCollectionId },
+        {
+            key: "categoriesCollectionId",
+            value: appwriteConfig.categoriesCollectionId,
+        },
+        { key: "menuCollectionId", value: appwriteConfig.menuCollectionId },
+        {
+            key: "customizationsCollectionId",
+            value: appwriteConfig.customizationsCollectionId,
+        },
+        {
+            key: "menuCustomizationsCollectionId",
+            value: appwriteConfig.menuCustomizationsCollectionId,
+        },
     ];
 
     for (const keyVal of keyVals) {
