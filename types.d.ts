@@ -29,7 +29,7 @@ export interface CartCustomization {
     type: string;
 }
 
-export interface CartItemType {
+export interface CartItem {
     id: string; // menu item id
     name: string;
     price: number;
